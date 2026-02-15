@@ -18,9 +18,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Stay", path: "/" },
-    { name: "Car Rental", path: "/destinations" },
-    { name: "Attraction", path: "/popular" },
+    { name: "Properties", path: "/" },
+    { name: "Destinations", path: "/destinations" },
+    { name: "Popular", path: "/popular" },
+    { name: "Admin", path: "/admin" },
   ];
 
   return (
@@ -28,8 +29,8 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-background/70 backdrop-blur-xl shadow-lg shadow-background/20 border-b border-border/30"
-          : "bg-background/30 backdrop-blur-md"
+          ? "glass-strong shadow-lg shadow-background/20"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,16 +88,12 @@ const Navbar = () => {
               )} />
               <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
-            <Link to="/login">
-              <Button variant="ghost" size="sm" className="hover:scale-105 transition-transform">
-                Log in
-              </Button>
-            </Link>
-            <Link to="/signup">
-              <Button variant="hero" size="default" className="animate-pulse-glow">
-                Sign up
-              </Button>
-            </Link>
+            <Button variant="ghost" size="sm" className="hover:scale-105 transition-transform">
+              Log in
+            </Button>
+            <Button variant="hero" size="default" className="animate-pulse-glow">
+              Sign up
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,16 +143,12 @@ const Navbar = () => {
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
-            <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button variant="ghost" size="sm" className="w-full">
-                Log in
-              </Button>
-            </Link>
-            <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button variant="hero" size="sm" className="w-full">
-                Sign up
-              </Button>
-            </Link>
+            <Button variant="ghost" size="sm" className="flex-1">
+              Log in
+            </Button>
+            <Button variant="hero" size="sm" className="flex-1">
+              Sign up
+            </Button>
           </div>
         </div>
       </div>

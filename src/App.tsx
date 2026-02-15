@@ -10,8 +10,6 @@ import HotelDetail from "./pages/HotelDetail";
 import Destinations from "./pages/Destinations";
 import Popular from "./pages/Popular";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +26,6 @@ const App = () => (
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/popular" element={<Popular />} />
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
