@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Hotel, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -18,10 +20,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Properties", path: "/" },
-    { name: "Destinations", path: "/destinations" },
-    { name: "Popular", path: "/popular" },
-    { name: "Admin", path: "/admin" },
+    { name: "Stay", path: "/" },
+    { name: "Car Rental", path: "/car-rental" },
+    { name: "Attractions", path: "/attractions" },
   ];
 
   return (
@@ -29,17 +30,14 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "glass-strong shadow-lg shadow-background/20"
-          : "bg-transparent"
+          ? "bg-background/70 backdrop-blur-xl shadow-lg shadow-background/20 border-b border-border/30"
+          : "bg-background/30 backdrop-blur-md"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-3 group"
-          >
+          <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
               <div className="relative bg-gradient-to-r from-primary to-accent p-2.5 rounded-xl">
@@ -72,7 +70,6 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="relative p-2.5 rounded-xl glass transition-all duration-300 hover:scale-110 hover:bg-primary/10 group"
@@ -88,12 +85,16 @@ const Navbar = () => {
               )} />
               <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
-            <Button variant="ghost" size="sm" className="hover:scale-105 transition-transform">
-              Log in
-            </Button>
-            <Button variant="hero" size="default" className="animate-pulse-glow">
-              Sign up
-            </Button>
+            <Link to="/login">
+              <Button variant="ghost" size="sm" className="hover:scale-105 transition-transform">
+                Log in
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="hero" size="default" className="animate-pulse-glow">
+                Sign up
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,11 +102,7 @@ const Navbar = () => {
             className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
@@ -113,8 +110,8 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "md:hidden absolute top-full left-0 right-0 glass-strong overflow-hidden transition-all duration-300",
-          isMobileMenuOpen ? "max-h-96 border-b border-border" : "max-h-0"
+          "md:hidden absolute top-full left-0 right-0 bg-background/80 backdrop-blur-xl overflow-hidden transition-all duration-300",
+          isMobileMenuOpen ? "max-h-96 border-b border-border/30" : "max-h-0"
         )}
       >
         <div className="container mx-auto px-4 py-4 space-y-4">
@@ -135,7 +132,6 @@ const Navbar = () => {
             </Link>
           ))}
           <div className="pt-4 border-t border-border flex gap-3">
-            {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2.5 rounded-xl glass transition-all duration-300"
@@ -143,12 +139,12 @@ const Navbar = () => {
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
-            <Button variant="ghost" size="sm" className="flex-1">
-              Log in
-            </Button>
-            <Button variant="hero" size="sm" className="flex-1">
-              Sign up
-            </Button>
+            <Link to="/login" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="ghost" size="sm" className="w-full">Log in</Button>
+            </Link>
+            <Link to="/signup" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="hero" size="sm" className="w-full">Sign up</Button>
+            </Link>
           </div>
         </div>
       </div>
